@@ -1,0 +1,90 @@
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-9th86[0m
+{"level":"warn","ts":1577457967.4659507,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1577457967.4666371,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-v92cb[0m
+{"level":"warn","ts":1577457969.1279073,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1577457969.1301877,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /workspace/source\""}
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-cb-kubecd-bdd-gh-1577455876-pr-gnsb7[0m
+{"level":"warn","ts":1577458071.2264583,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1577458072.3736367,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/cb-kubecd/bdd-gh-1577455876.git @ master in path /workspace/source"}
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:bfc33a665a84c9f9d5e2c42aa813fcaf76bd347f,1:cbf064c20121ceacd8395797edd3707321b5d1ed
+DEBUG: ran git fetch --unshallow origin cbf064c20121ceacd8395797edd3707321b5d1ed: bfc33a665a84c9f9d5e2c42aa813fcaf76bd347f: in 
+DEBUG: ran git checkout master in 
+DEBUG: ran git reset --hard bfc33a665a84c9f9d5e2c42aa813fcaf76bd347f in 
+DEBUG: ran clean --force -d . in 
+DEBUG: ran git merge cbf064c20121ceacd8395797edd3707321b5d1ed in 
+Merged SHA cbf064c20121ceacd8395797edd3707321b5d1ed with commit message 'My first PR commit' into base branch master
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-make-linux[0m
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO15VENDOREXPERIMENT=1 go build -ldflags '' -o bin/bdd-gh-1577455876 main.go
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-container-build[0m
+[36mINFO[0m[0000] No base image, nothing to extract            
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0000] Taking snapshot of full filesystem...        
+[36mINFO[0m[0000] EXPOSE 8080                                  
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] ENTRYPOINT ["/bdd-gh-1577455876"]            
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] COPY ./bin/ /                                
+[36mINFO[0m[0000] Taking snapshot of files...                  
+2019/12/27 14:48:08 pushed blob: sha256:03ec89fa8d40c0370765ef6bff30612b01706989ac3bf09f862f9dca6e3798b2
+2019/12/27 14:48:08 pushed blob: sha256:e1c6421c34dda8f2e28f73b2dd48e362bf4161f995b855420508a6409265876f
+2019/12/27 14:48:10 gcr.io/jenkins-x-bdd3/bdd-gh-1577455876:0.0.0-SNAPSHOT-PR-1-1: digest: sha256:ffa5f3432a57adc4241f6045ad41ea033b68275bdba6737ca0ba53fce57b3a50 size: 428
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-postbuild-post-build[0m
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-make-preview[0m
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-1-1/" Chart.yaml
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-1-1/" ../*/Chart.yaml
+sed -i -e "s|repository:.*|repository: gcr.io\/jenkins-x-bdd3\/bdd-gh-1577455876|" values.yaml
+sed -i -e "s/tag:.*/tag: 0.0.0-SNAPSHOT-PR-1-1/" values.yaml
+echo "  version: 0.0.0-SNAPSHOT-PR-1-1" >> requirements.yaml
+** step helm build
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: storage.googleapis.com https://storage.googleapis.com/chartmuseum.jenkins-x.io
+Read credentials for https://storage.googleapis.com/chartmuseum.jenkins-x.io from vault helm/repos
+Successfully added Helm repository storage.googleapis.com.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Read credentials for http://jenkins-x-chartmuseum:8080 from vault helm/repos
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: chartmuseum.jenkins-x.io http://chartmuseum.jenkins-x.io
+Read credentials for http://chartmuseum.jenkins-x.io from vault helm/repos
+Successfully added Helm repository chartmuseum.jenkins-x.io.
+
+Showing logs for build [32mcb-kubecd-bdd-gh-1577455876-pr-1[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-jx-preview[0m
+Creating a preview
+Created environment cb-kubecd-bdd-gh-1577455876-pr-1
+Namespace **-cb-kubecd-bdd-gh-1577455876-pr-1 created 
+expose:
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+  config:
+    domain: 35.190.194.68.nip.io
+    exposer: Ingress
+    http: "true"
+preview:
+  image:
+    repository: gcr.io/jenkins-x-bdd3/bdd-gh-1577455876
+    tag: 0.0.0-SNAPSHOT-PR-1-1
+
+
+Updating PipelineActivities cb-kubecd-bdd-gh-1577455876-pr-1-1 which has status Running
+WARNING: preview application http://bdd-gh-1577455876.**-cb-kubecd-bdd-gh-1577455876-pr-1.35.190.194.68.nip.io not available, error was 503 503 Service Temporarily Unavailable, delaying for: 1.426986804s
+Preview application is now available at: http://bdd-gh-1577455876.**-cb-kubecd-bdd-gh-1577455876-pr-1.35.190.194.68.nip.io
